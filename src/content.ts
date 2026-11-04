@@ -25,26 +25,26 @@ export const socials = [
 export const heroTagline = 'I build AI-powered products.';
 
 export const flipBio = [
-  'Full-stack developer shipping with React, Next.js, Flask and LLM APIs — from construction document pipelines at IIT Roorkee to study trackers used across campuses.',
-  'GATE CS 2026 qualified, selected for the University of Tokyo\'s data science programme.',
-  'Currently finishing a dual degree (B.Tech CSE + IIT Madras BS Data Science) and building tools that make AI useful for real people.',
+  'Full-stack developer who ships with React, Next.js, Flask and LLM APIs. Built AI pipelines at IIT Roorkee and study tools used across campuses.',
+  'GATE CS 2026 qualified. Selected for the University of Tokyo data science programme.',
+  'Wrapping up a dual degree in B.Tech CSE and IIT Madras BS Data Science, building tools that bring AI closer to real people.',
 ];
 
 export const aboutDescription = [
-  'I\'m Hira Irshad — a dual degree student pursuing B.Tech in Computer Science & Engineering from MJPRU Bareilly (2023–2027) alongside a BS in Data Science & Applications from IIT Madras.',
-  'I ship full-stack products using React, Next.js, Flask and LLM APIs. From constructing AI pipelines at IIT Roorkee to building study trackers used across campuses, I love turning ideas into real tools.',
-  'GATE CS 2026 qualified and selected for the University of Tokyo\'s data science programme. Open to internships, freelance work, and collaborations.',
+  'Hi, I\'m Hira Irshad. A dual degree student in Computer Science and Engineering at MJPRU Bareilly (2023 to 2027) and Data Science at IIT Madras.',
+  'I build full-stack products with React, Next.js, Flask and LLM APIs. From AI pipelines at IIT Roorkee to campus-wide study trackers, I turn ideas into tools people actually use.',
+  'Qualified GATE CS 2026 and selected for the University of Tokyo data science programme. Always open to internships, freelance gigs, and exciting collaborations.',
 ];
 
 export const aboutMe = {
   education: [
-    {degree: 'B.Tech Computer Science & Engineering', school: 'MJPRU, Bareilly', year: '2023 – 2027'},
-    {degree: 'BS in Data Science & Applications', school: 'IIT Madras', year: '2023 – Present'},
+    {degree: 'B.Tech Computer Science & Engineering', school: 'MJPRU, Bareilly', year: '2023 - 2027'},
+    {degree: 'BS in Data Science & Applications', school: 'IIT Madras', year: '2023 - Present'},
   ],
   achievements: [
     'GATE CS 2026 Qualified',
     'Selected for University of Tokyo Data Science Programme',
-    'AI/ML Intern at IIT Roorkee — Google Centre for Climate Technology',
+    'AI/ML Intern at IIT Roorkee , Google Centre for Climate Technology',
     'Web Developer at Saranda House, IIT Madras BS',
   ],
   certifications: [
@@ -71,7 +71,7 @@ export const projects = [
   {
     name: 'SmartSearch PDF',
     tagline: 'AI-Grounded PDF Topic Search',
-    desc: 'Find every occurrence of a word in any PDF with page, chapter and context — then ask Gemini to explain it.',
+    desc: 'Find every occurrence of a word in any PDF with page, chapter and context , then ask Gemini to explain it.',
     detail: 'Full-stack app that detects chapters from the PDF\'s table of contents with a font-size heading fallback. Calls the LLM only for rows the user shortlists, keeping search instant and API usage low. Built with a React 18 frontend and Flask backend powered by PyMuPDF for PDF parsing.',
     stack: ['Python', 'Flask', 'PyMuPDF', 'React', 'Vite', 'Gemini API'],
     github: 'https://github.com/HIRA04IRSHAD/smartsearch-pdf',
@@ -80,7 +80,7 @@ export const projects = [
   {
     name: 'StudyDuel',
     tagline: 'Competitive Study Tracker',
-    desc: 'Two-player study tracker for GATE and DSA prep — daily tasks, streaks, head-to-head battles, live Firebase sync.',
+    desc: 'Two-player study tracker for GATE and DSA prep , daily tasks, streaks, head-to-head battles, live Firebase sync.',
     detail: 'Built for two partners preparing for GATE and DSA together: daily task checklists with streaks, subject-wise progress, weekly schedules, an exam countdown and a shared resource library. Uses a 6-character invite code for team pairing, Firebase Realtime Database listeners for live sync, and a Battle view comparing both users\' daily tasks and LeetCode counts.',
     stack: ['React', 'Vite', 'Firebase Auth', 'Firebase Realtime DB', 'React Router'],
     github: 'https://github.com/HIRA04IRSHAD/studyduel',
@@ -166,13 +166,13 @@ export const experience = [
   {
     role: 'AI/ML Intern',
     org: 'IIT Roorkee · Google Centre for Climate Technology',
-    period: 'Sep – Oct 2026',
+    period: 'Sep - Oct 2026',
     detail: 'BoQ-to-Material-Passport extraction pipeline for AMP-GEN. Processed construction documents using Python, NLP, and structured data extraction to create machine-readable material passports.',
   },
   {
     role: 'Web Developer',
     org: 'Saranda House, IIT Madras BS',
-    period: 'Nov 2025 – Present',
+    period: 'Nov 2025 - Present',
     detail: 'Building and maintaining the house website. Contributed scroll-to-top navigation, upcoming-meetups blocks, and newsletter subscription features.',
   },
 ];

@@ -141,7 +141,7 @@ export function useScrollReveal() {
       {threshold: 0.01, rootMargin: '0px 0px 100px 0px'},
     );
 
-    const observe = () => document.querySelectorAll('.fade-up:not(.visible)').forEach((el) => io.observe(el));
+    const observe = () => document.querySelectorAll('.fade-up:not(.visible), .fade-left:not(.visible), .fade-right:not(.visible), .scale-in:not(.visible), .blur-in:not(.visible)').forEach((el) => io.observe(el));
 
     // Initial pass after React render settles
     const timer = setTimeout(observe, 100);

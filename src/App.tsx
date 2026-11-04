@@ -38,6 +38,24 @@ const SocialIcon = ({icon, className}: {icon: string; className?: string}) => {
 };
 
 /* ================================================================== */
+/*  Intro Loader (split screen)                                        */
+/* ================================================================== */
+
+function IntroLoader({done, hidden}: {done: boolean; hidden: boolean}) {
+  if (hidden) return null;
+  return (
+    <div className={`intro-loader ${done ? 'done' : ''}`} aria-hidden="true">
+      <div className="split-half split-left">
+        <span className="loader-text">Hi</span>
+      </div>
+      <div className="split-half split-right">
+        <span className="loader-text">ra</span>
+      </div>
+    </div>
+  );
+}
+
+/* ================================================================== */
 /*  Glossy Sticky Navbar                                               */
 /* ================================================================== */
 
@@ -193,13 +211,13 @@ function AboutSection() {
       </h2>
 
       {/* Description paragraph first */}
-      <div className="fade-up mx-auto mb-8 max-w-2xl space-y-3 text-center">
+      <div className="blur-in mx-auto mb-8 max-w-2xl space-y-3 text-center">
         {aboutDescription.map((p, i) => (
           <p key={i} className="text-[15px] leading-relaxed text-mute">{p}</p>
         ))}
       </div>
 
-      <div className="fade-up glossy-curve mx-auto max-w-3xl p-6 md:p-8">
+      <div className="scale-in glossy-curve mx-auto max-w-3xl p-6 md:p-8">
         <div className="mb-6 flex flex-wrap gap-2">
           {tabs.map((tab) => (
             <button
@@ -456,7 +474,7 @@ function ContactSection() {
         Open to collaborations, internships, freelance projects, and interesting conversations
       </p>
 
-      <div className="fade-up mx-auto grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-2">
+      <div className="scale-in mx-auto grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-2">
         {/* Social links + resume */}
         <div className="glossy-curve p-6 md:p-8">
           <h3 className="mb-4 font-cursive text-[18px] font-bold">Get in Touch</h3>
@@ -518,7 +536,7 @@ function ContactSection() {
 function FreelanceCTA() {
   return (
     <section className="px-[clamp(16px,2.4vw,36px)] pb-[clamp(40px,8vh,80px)]">
-      <div className="fade-up glossy-curve mx-auto max-w-3xl p-8 text-center md:p-12">
+      <div className="scale-in glossy-curve mx-auto max-w-3xl p-8 text-center md:p-12">
         <h2 className="mb-3 font-cursive text-[clamp(24px,3vw,36px)] font-bold">
           Open for <span className="gradient-text italic">Freelancing</span>
         </h2>
@@ -551,16 +569,38 @@ export default function App() {
   const [openProject, setOpenProject] = useState<number | null>(null);
   useScrollReveal();
 
+  const [loaderDone, setLoaderDone] = useState(false);
+  const [loaderHidden, setLoaderHidden] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    const t1 = setTimeout(() => {
+      setLoaderDone(true);
+      document.body.style.overflow = '';
+    }, 1800);
+    const t2 = setTimeout(() => setLoaderHidden(true), 3200);
+    return () => { clearTimeout(t1); clearTimeout(t2); document.body.style.overflow = ''; };
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', onScroll, {passive: true});
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
     <div className="flex min-h-[100svh] flex-col bg-page text-ink">
+      <IntroLoader done={loaderDone} hidden={loaderHidden} />
       <StickyNav dark={dark} onToggle={toggle} />
 
       {/* Spacer for fixed nav */}
       <div className="h-14" />
 
       {/* Hero */}
-      <main className="relative isolate flex flex-1 flex-col px-[clamp(16px,2.4vw,36px)] pt-[clamp(20px,5vh,56px)] text-center">
-        <h1 ref={title} className="headline relative z-0 inline-block text-[21vw] md:whitespace-nowrap">
+      <main className="relative isolate flex flex-col px-[clamp(16px,2.4vw,36px)] pt-[clamp(20px,5vh,56px)] text-center">
+        <h1 ref={title} className="headline relative z-0 inline-block text-[21vw] md:whitespace-nowrap"
+          style={{transform: `translateY(${Math.min(scrollY * 0.08, 80)}px)`, willChange: scrollY > 0 ? 'transform' : undefined}}>
           <span className="block md:inline">Hey, I'm </span>
           <span className="marker">{person.name}</span>
         </h1>
@@ -568,7 +608,8 @@ export default function App() {
         {/* Image LEFT, Experience RIGHT */}
         <div className="relative grid flex-1 grid-cols-1 items-center gap-x-10 gap-y-8 text-left md:grid-cols-[1fr_1fr] lg:grid-cols-[auto_1fr]">
           {/* Left: Flip photo */}
-          <div className="stage relative mx-auto w-[min(80vw,400px)] md:order-1">
+          <div className="stage relative mx-auto w-[min(80vw,400px)] md:order-1"
+            style={{transform: `translateY(${Math.min(scrollY * -0.04, 0)}px)`}}>
             <FlipPhoto />
           </div>
 
