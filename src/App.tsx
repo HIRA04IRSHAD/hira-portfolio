@@ -364,11 +364,11 @@ function TechStackSection() {
   const categories = Object.entries(techStack);
 
   const catColors: Record<string, string> = {
-    'Frontend': '#3b82f6',
-    'Backend': '#22c55e',
-    'AI / ML': '#a855f7',
-    'Data': '#f59e0b',
-    'Cloud & Tools': '#ec4899',
+    'Frontend': '#722F37',
+    'Backend': '#9CAF88',
+    'AI / ML': '#CC7722',
+    'Data': '#B7A89A',
+    'Cloud & Tools': '#8B6F5E',
   };
 
   return (

@@ -1,30 +1,33 @@
 @import 'tailwindcss';
 
-/* ---- Glossy Curve palette ---- */
+/* ---- Light: Cosmin Latte + Mocha Cream + Deep Burgundy ---- */
 :root {
-  --page: #f0f0f5;
-  --ink: #1a1a2e;
-  --mute: #1a1a2e88;
-  --line: #1a1a2e18;
-  --field: rgba(255, 255, 255, 0.55);
-  --disc: #4f46e5;
-  --sun: #f59e0b;
-  --glow: #4f46e544;
-  --glass: rgba(255, 255, 255, 0.35);
-  --glass-border: rgba(255, 255, 255, 0.45);
-  --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.12);
+  --page: #E8DCC6;
+  --ink: #3B2024;
+  --mute: #3B202488;
+  --line: #3B202418;
+  --field: rgba(232, 220, 198, 0.6);
+  --disc: #722F37;
+  --sun: #B7A89A;
+  --glow: #722F3744;
+  --glass: rgba(232, 220, 198, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.35);
+  --glass-shadow: 0 8px 32px rgba(114, 47, 55, 0.1);
   color-scheme: light;
 }
+/* ---- Dark: Sage Green + Concrete Grey + Burnt Amber ---- */
 :root[data-theme='dark'] {
-  --page: #0c0c1d;
-  --ink: #ededf4;
-  --mute: #ededf488;
-  --line: #ededf41a;
-  --field: rgba(28, 28, 58, 0.6);
-  --glow: #4f46e566;
-  --glass: rgba(30, 30, 60, 0.45);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --page: #2C2C2C;
+  --ink: #E8E2D9;
+  --mute: #E8E2D988;
+  --line: #E8E2D91a;
+  --field: rgba(55, 55, 50, 0.6);
+  --disc: #9CAF88;
+  --sun: #CC7722;
+  --glow: #9CAF8855;
+  --glass: rgba(50, 50, 46, 0.5);
+  --glass-border: rgba(156, 175, 136, 0.2);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
   color-scheme: dark;
 }
 
@@ -239,7 +242,7 @@ body {
 
 /* ---- Gradient text ---- */
 .gradient-text {
-  background: linear-gradient(135deg, var(--disc) 0%, #8b5cf6 50%, var(--sun) 100%);
+  background: linear-gradient(135deg, var(--disc) 0%, var(--sun) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -255,7 +258,7 @@ body {
   position: absolute;
   inset: -2px;
   border-radius: inherit;
-  background: linear-gradient(135deg, var(--disc), #8b5cf6, var(--sun));
+  background: linear-gradient(135deg, var(--disc), var(--sun));
   opacity: 0;
   z-index: -1;
   filter: blur(12px);

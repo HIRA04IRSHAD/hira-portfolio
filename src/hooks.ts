@@ -54,7 +54,7 @@ export function useTheme() {
 
   useEffect(() => {
     document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#0e1015' : '#e8ebf1');
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#2C2C2C' : '#E8DCC6');
     try {
       localStorage.setItem(THEME_KEY, dark ? 'dark' : 'light');
     } catch {
