@@ -294,7 +294,7 @@ function ProjectCard({project, isOpen, onToggle}: {
   onToggle: () => void;
 }) {
   return (
-    <div className="project-card glossy-curve p-5 md:p-6" onClick={onToggle}>
+    <div className={`project-card glossy-curve p-5 md:p-6 ${isOpen ? 'selected' : ''}`} onClick={onToggle}>
       <div className="card-stripe" style={{background: project.color}} />
       <div className="relative z-10">
         <div className="mb-1 flex items-center justify-between">
@@ -307,34 +307,44 @@ function ProjectCard({project, isOpen, onToggle}: {
         <p className="mb-1 font-sans text-[11px] font-medium uppercase tracking-widest text-mute">{project.tagline}</p>
         <p className="mb-3 text-[13.5px] leading-relaxed text-mute">{project.desc}</p>
 
-        <div className={`detail-panel ${isOpen ? 'open' : ''}`}>
-          <div className="detail-inner">
-            <div className="mb-4 border-t border-line pt-4">
-              <p className="mb-4 text-[13.5px] leading-relaxed" style={{color: 'var(--ink)', opacity: 0.8}}>{project.detail}</p>
-              <div className="mb-4 flex flex-wrap gap-2">
-                <a href={project.github} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}
-                  className="btn-glossy inline-flex items-center gap-1.5 rounded-full px-4 py-2 font-sans text-[12px] font-semibold uppercase tracking-wider">
-                  <GithubIcon className="size-3.5" /> Source Code
-                </a>
-                {'live' in project && project.live && (
-                  <a href={project.live} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}
-                    className="btn-glossy-filled inline-flex items-center gap-1.5 rounded-full px-4 py-2 font-sans text-[12px] font-semibold uppercase tracking-wider">
-                    <ExternalIcon /> Live Demo
-                  </a>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div className="flex flex-wrap gap-1.5">
-          {(isOpen ? project.stack : project.stack.slice(0, 3)).map((t) => (
+          {project.stack.slice(0, 3).map((t) => (
             <span key={t} className="rounded-full border border-line bg-field/50 px-2.5 py-1 font-sans text-[11px] font-medium uppercase tracking-wider text-mute">{t}</span>
           ))}
-          {!isOpen && project.stack.length > 3 && (
+          {project.stack.length > 3 && (
             <span className="rounded-full border border-line bg-field/50 px-2.5 py-1 font-sans text-[11px] font-medium uppercase tracking-wider text-mute">+{project.stack.length - 3}</span>
           )}
         </div>
+      </div>
+    </div>
+  );
+}
+
+function ProjectDetail({project}: {project: (typeof projects)[0]}) {
+  return (
+    <div className="glossy-curve p-6 md:p-8">
+      <div className="flex items-center gap-3 mb-3">
+        <span className="size-4 rounded-full" style={{background: project.color, boxShadow: `0 0 16px ${project.color}`}} />
+        <h3 className="font-cursive text-[1.4em] font-bold">{project.name}</h3>
+        <span className="font-sans text-[11px] font-medium uppercase tracking-widest text-mute">{project.tagline}</span>
+      </div>
+      <p className="mb-4 text-[14px] leading-relaxed" style={{color: 'var(--ink)', opacity: 0.85}}>{project.detail}</p>
+      <div className="mb-4 flex flex-wrap gap-2">
+        <a href={project.github} target="_blank" rel="noopener noreferrer"
+          className="btn-glossy inline-flex items-center gap-1.5 rounded-full px-4 py-2 font-sans text-[12px] font-semibold uppercase tracking-wider">
+          <GithubIcon className="size-3.5" /> Source Code
+        </a>
+        {'live' in project && project.live && (
+          <a href={project.live} target="_blank" rel="noopener noreferrer"
+            className="btn-glossy-filled inline-flex items-center gap-1.5 rounded-full px-4 py-2 font-sans text-[12px] font-semibold uppercase tracking-wider">
+            <ExternalIcon /> Live Demo
+          </a>
+        )}
+      </div>
+      <div className="flex flex-wrap gap-1.5">
+        {project.stack.map((t) => (
+          <span key={t} className="rounded-full border border-line bg-field/50 px-2.5 py-1 font-sans text-[11px] font-medium uppercase tracking-wider text-mute">{t}</span>
+        ))}
       </div>
     </div>
   );
@@ -594,11 +604,8 @@ export default function App() {
       <IntroLoader done={loaderDone} hidden={loaderHidden} />
       <StickyNav dark={dark} onToggle={toggle} />
 
-      {/* Spacer for fixed nav */}
-      <div className="h-14" />
-
       {/* Hero */}
-      <main className="relative isolate flex flex-col px-[clamp(16px,2.4vw,36px)] pt-[clamp(20px,5vh,56px)] text-center">
+      <main className="relative isolate flex flex-col px-[clamp(16px,2.4vw,36px)] pt-[clamp(72px,10vh,100px)] text-center">
         <h1 ref={title} className="headline relative z-0 inline-block text-[21vw] md:whitespace-nowrap"
           style={{transform: `translateY(${Math.min(scrollY * 0.08, 80)}px)`, willChange: scrollY > 0 ? 'transform' : undefined}}>
           <span className="block md:inline">Hey, I'm </span>
@@ -636,6 +643,12 @@ export default function App() {
               <ProjectCard project={p} isOpen={openProject === i} onToggle={() => setOpenProject(openProject === i ? null : i)} />
             </div>
           ))}
+        </div>
+        {/* Detail panel below grid */}
+        <div className={`detail-panel mx-auto max-w-5xl mt-4 ${openProject !== null ? 'open' : ''}`}>
+          <div className="detail-inner">
+            {openProject !== null && <ProjectDetail project={projects[openProject]} />}
+          </div>
         </div>
       </section>
 

@@ -44,7 +44,7 @@ export const aboutMe = {
   achievements: [
     'GATE CS 2026 Qualified',
     'Selected for University of Tokyo Data Science Programme',
-    'AI/ML Intern at IIT Roorkee , Google Centre for Climate Technology',
+    'AI/ML Intern at IIT Roorkee, Google Centre for Climate Technology',
     'Web Developer at Saranda House, IIT Madras BS',
   ],
   certifications: [
@@ -71,7 +71,7 @@ export const projects = [
   {
     name: 'SmartSearch PDF',
     tagline: 'AI-Grounded PDF Topic Search',
-    desc: 'Find every occurrence of a word in any PDF with page, chapter and context , then ask Gemini to explain it.',
+    desc: 'Find every occurrence of a word in any PDF with page, chapter and context, then ask Gemini to explain it.',
     detail: 'Full-stack app that detects chapters from the PDF\'s table of contents with a font-size heading fallback. Calls the LLM only for rows the user shortlists, keeping search instant and API usage low. Built with a React 18 frontend and Flask backend powered by PyMuPDF for PDF parsing.',
     stack: ['Python', 'Flask', 'PyMuPDF', 'React', 'Vite', 'Gemini API'],
     github: 'https://github.com/HIRA04IRSHAD/smartsearch-pdf',
@@ -80,7 +80,7 @@ export const projects = [
   {
     name: 'StudyDuel',
     tagline: 'Competitive Study Tracker',
-    desc: 'Two-player study tracker for GATE and DSA prep , daily tasks, streaks, head-to-head battles, live Firebase sync.',
+    desc: 'Two-player study tracker for GATE and DSA prep: daily tasks, streaks, head-to-head battles, live Firebase sync.',
     detail: 'Built for two partners preparing for GATE and DSA together: daily task checklists with streaks, subject-wise progress, weekly schedules, an exam countdown and a shared resource library. Uses a 6-character invite code for team pairing, Firebase Realtime Database listeners for live sync, and a Battle view comparing both users\' daily tasks and LeetCode counts.',
     stack: ['React', 'Vite', 'Firebase Auth', 'Firebase Realtime DB', 'React Router'],
     github: 'https://github.com/HIRA04IRSHAD/studyduel',
@@ -123,15 +123,6 @@ export const projects = [
     stack: ['JavaScript', 'HTML5 Canvas', 'CSS'],
     github: 'https://github.com/HIRA04IRSHAD/interactive-canvas-app',
     color: '#f97316',
-  },
-  {
-    name: 'GATE DSA Tracker',
-    tagline: 'Daily Prep Dashboard',
-    desc: 'Track daily DSA practice, GATE subjects, and LeetCode progress with streak counting.',
-    detail: 'Personal dashboard for GATE CS and DSA prep tracking. Logs daily practice, subject-wise syllabus coverage, and LeetCode progress with streaks. Firebase backend for persistent data.',
-    stack: ['React', 'Firebase', 'JavaScript'],
-    github: 'https://github.com/HIRA04IRSHAD/gate-dsa-tracker',
-    color: '#06b6d4',
   },
   {
     name: 'Saranda House Website',

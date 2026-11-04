@@ -161,20 +161,26 @@ body {
   pointer-events: none;
 }
 
-/* ---- Sticky glossy navbar ---- */
+/* ---- Floating glossy navbar ---- */
 .sticky-nav {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 1100px;
   z-index: 100;
-  background: var(--glass);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--glass-border);
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--page) 65%, transparent);
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  transition: box-shadow 0.35s ease, background 0.35s ease;
 }
 .sticky-nav.scrolled {
-  box-shadow: 0 4px 32px rgba(0,0,0,0.12), inset 0 -1px 0 rgba(255,255,255,0.1);
+  background: color-mix(in srgb, var(--page) 80%, transparent);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1), inset 0 -1px 0 rgba(255,255,255,0.1);
 }
 
 /* ---- Flip card ---- */
@@ -292,10 +298,16 @@ body {
 /* ---- Expandable panels ---- */
 .detail-panel {
   display: grid; grid-template-rows: 0fr;
-  transition: grid-template-rows 0.4s cubic-bezier(0.16,1,0.3,1);
+  transition: grid-template-rows 0.5s cubic-bezier(0.16,1,0.3,1);
 }
 .detail-panel.open { grid-template-rows: 1fr; }
 .detail-inner { overflow: hidden; }
+
+/* ---- Project card selected state ---- */
+.project-card.selected {
+  border-color: var(--disc);
+  box-shadow: 0 0 0 2px var(--disc), 0 20px 50px -12px var(--glow);
+}
 
 .section-panel {
   display: grid; grid-template-rows: 0fr;
