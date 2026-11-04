@@ -86,17 +86,17 @@ export function useTilt<T extends HTMLElement>() {
 
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
-        const tiltX = y * -14; // tilt away from cursor vertically
-        const tiltY = x * 14; // tilt toward cursor horizontally
+        const tiltX = y * -18;
+        const tiltY = x * 18;
         const tiltEl = el.querySelector<HTMLElement>('[data-tilt]');
         const shineEl = el.querySelector<HTMLElement>('[data-shine]');
         if (tiltEl) {
-          tiltEl.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.03, 1.03, 1.03)`;
+          tiltEl.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.04, 1.04, 1.04)`;
         }
         if (shineEl) {
           const angle = Math.atan2(y, x) * (180 / Math.PI) + 90;
           const intensity = Math.min(Math.hypot(x, y) * 1.6, 0.7);
-          shineEl.style.background = `linear-gradient(${angle}deg, rgba(255,255,255,${intensity * 0.35}) 0%, transparent 60%)`;
+          shineEl.style.background = `linear-gradient(${angle}deg, rgba(255,255,255,${intensity * 0.4}) 0%, transparent 60%)`;
           shineEl.style.opacity = '1';
         }
       });
@@ -124,4 +124,27 @@ export function useTilt<T extends HTMLElement>() {
   }, []);
 
   return {ref, hovered};
+}
+
+/** Triggers the 'visible' class on elements with 'fade-up' when they scroll into view. */
+export function useScrollReveal() {
+  useEffect(() => {
+    // Small delay so the DOM settles after React's render cycle.
+    const timer = setTimeout(() => {
+      const els = document.querySelectorAll('.fade-up');
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {threshold: 0.05, rootMargin: '0px 0px -20px 0px'},
+      );
+      els.forEach((el) => observer.observe(el));
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
 }
