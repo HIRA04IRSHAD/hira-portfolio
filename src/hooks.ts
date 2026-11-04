@@ -129,22 +129,31 @@ export function useTilt<T extends HTMLElement>() {
 /** Triggers the 'visible' class on elements with 'fade-up' when they scroll into view. */
 export function useScrollReveal() {
   useEffect(() => {
-    // Small delay so the DOM settles after React's render cycle.
-    const timer = setTimeout(() => {
-      const els = document.querySelectorAll('.fade-up');
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        {threshold: 0.05, rootMargin: '0px 0px -20px 0px'},
-      );
-      els.forEach((el) => observer.observe(el));
-    }, 100);
-    return () => clearTimeout(timer);
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      {threshold: 0.01, rootMargin: '0px 0px 100px 0px'},
+    );
+
+    const observe = () => document.querySelectorAll('.fade-up:not(.visible)').forEach((el) => io.observe(el));
+
+    // Initial pass after React render settles
+    const timer = setTimeout(observe, 100);
+
+    // Re-observe when new .fade-up elements appear
+    const mo = new MutationObserver(observe);
+    mo.observe(document.body, {childList: true, subtree: true});
+
+    return () => {
+      clearTimeout(timer);
+      io.disconnect();
+      mo.disconnect();
+    };
   }, []);
 }

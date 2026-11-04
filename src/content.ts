@@ -6,6 +6,7 @@ export const person = {
   handle: '@HIRA04IRSHAD',
   location: 'India',
   email: 'irshad04hira@gmail.com',
+  resumeUrl: `${base}resume.pdf`,
 };
 
 export const nav = [
@@ -21,15 +22,23 @@ export const socials = [
   {label: 'Email', href: 'mailto:irshad04hira@gmail.com', icon: 'email'},
 ];
 
-export const bio = [
-  'I build AI-powered products.',
-  'Full-stack developer shipping with React, Next.js, Flask and LLM APIs — from construction document pipelines at IIT Roorkee to study trackers used across campuses. GATE CS 2026 qualified, selected for the University of Tokyo\'s data science programme.',
+export const heroTagline = 'I build AI-powered products.';
+
+export const flipBio = [
+  'Full-stack developer shipping with React, Next.js, Flask and LLM APIs — from construction document pipelines at IIT Roorkee to study trackers used across campuses.',
+  'GATE CS 2026 qualified, selected for the University of Tokyo\'s data science programme.',
   'Currently finishing a dual degree (B.Tech CSE + IIT Madras BS Data Science) and building tools that make AI useful for real people.',
+];
+
+export const aboutDescription = [
+  'I\'m Hira Irshad — a dual degree student pursuing B.Tech in Computer Science & Engineering from MJPRU Bareilly (2023–2027) alongside a BS in Data Science & Applications from IIT Madras.',
+  'I ship full-stack products using React, Next.js, Flask and LLM APIs. From constructing AI pipelines at IIT Roorkee to building study trackers used across campuses, I love turning ideas into real tools.',
+  'GATE CS 2026 qualified and selected for the University of Tokyo\'s data science programme. Open to internships, freelance work, and collaborations.',
 ];
 
 export const aboutMe = {
   education: [
-    {degree: 'B.Tech Computer Science & Engineering', school: 'MJPRU, Bareilly', year: '2021 – 2025'},
+    {degree: 'B.Tech Computer Science & Engineering', school: 'MJPRU, Bareilly', year: '2023 – 2027'},
     {degree: 'BS in Data Science & Applications', school: 'IIT Madras', year: '2023 – Present'},
   ],
   achievements: [
@@ -39,15 +48,23 @@ export const aboutMe = {
     'Web Developer at Saranda House, IIT Madras BS',
   ],
   certifications: [
-    'Google Cloud Computing Foundations',
-    'IIT Madras — Machine Learning Techniques',
-    'IIT Madras — Business Data Management',
+    'Google Cloud Computing Foundations (Google Cloud)',
+    'Machine Learning Techniques (IIT Madras)',
+    'Business Data Management (IIT Madras)',
+    'Machine Learning Practice (IIT Madras)',
+    'Business Analytics (IIT Madras)',
+    'Tools in Data Science (IIT Madras)',
+    'Programming in Python (IIT Madras)',
+    'English I & II (IIT Madras)',
+    'Statistics I & II (IIT Madras)',
+    'Mathematics I & II (IIT Madras)',
+    'Computational Thinking (IIT Madras)',
   ],
 };
 
 export const photos = {
-  headshot: `${base}photos/headshot.webp`,
-  outdoor: `${base}photos/outdoor.webp`,
+  headshot: `${base}photos/headshot-cropped.webp`,
+  outdoor: `${base}photos/outdoor-cropped.webp`,
 };
 
 export const projects = [
@@ -64,7 +81,7 @@ export const projects = [
     name: 'StudyDuel',
     tagline: 'Competitive Study Tracker',
     desc: 'Two-player study tracker for GATE and DSA prep — daily tasks, streaks, head-to-head battles, live Firebase sync.',
-    detail: 'Built for two partners preparing for GATE and DSA together: daily task checklists with streaks, subject-wise progress, weekly schedules, an exam countdown and a shared resource library. Uses a 6-character invite code for team pairing, Firebase Realtime Database listeners for live sync, and a Battle view comparing both users\' daily tasks and LeetCode counts with nudge messages.',
+    detail: 'Built for two partners preparing for GATE and DSA together: daily task checklists with streaks, subject-wise progress, weekly schedules, an exam countdown and a shared resource library. Uses a 6-character invite code for team pairing, Firebase Realtime Database listeners for live sync, and a Battle view comparing both users\' daily tasks and LeetCode counts.',
     stack: ['React', 'Vite', 'Firebase Auth', 'Firebase Realtime DB', 'React Router'],
     github: 'https://github.com/HIRA04IRSHAD/studyduel',
     live: 'https://studyduel-f6702.web.app',
@@ -74,8 +91,8 @@ export const projects = [
     name: 'ShopAI',
     tagline: 'Smart Shopping Assistant',
     desc: 'Natural-language product search that understands "best gaming laptop under 80k" and ranks results with a deal-score engine.',
-    detail: 'Parses category, budget, brand and feature requirements from natural language queries. Ranks results with a custom deal-score engine that factors in discount percentage, user ratings and sentiment analysis. Built with a Flask backend handling NLP processing and a vanilla JavaScript frontend.',
-    stack: ['Python', 'Flask', 'JavaScript', 'HTML/CSS'],
+    detail: 'Parses category, budget, brand and feature requirements from natural language queries. Ranks results with a custom deal-score engine that factors in discount percentage, user ratings and sentiment analysis. Flask backend with NLP processing and a vanilla JS frontend.',
+    stack: ['Python', 'Flask', 'JavaScript', 'HTML/CSS', 'NLP'],
     github: 'https://github.com/HIRA04IRSHAD/ShoppingPro',
     live: 'https://hira04irshad.github.io/ShoppingPro/',
     color: 'var(--disc)',
@@ -84,7 +101,7 @@ export const projects = [
     name: 'Learner Success Predictor',
     tagline: 'ML & Explainable AI Pipeline',
     desc: 'Predicting MOOC certification outcomes at 98.99% accuracy with XGBoost and SHAP explainability.',
-    detail: 'End-to-end ML pipeline on the HarvardX-MITx MOOC dataset using an XGBoost classifier. Integrated SHAP-based explainable AI to surface feature-level attributions (video engagement, forum participation) behind each prediction. Deployed through a Flask REST API with a React.js dashboard for real-time prediction, confidence scoring and risk assessment.',
+    detail: 'End-to-end ML pipeline on the HarvardX-MITx MOOC dataset using an XGBoost classifier. Integrated SHAP-based explainable AI to surface feature-level attributions. Deployed through a Flask REST API with a React.js dashboard for real-time prediction and risk assessment.',
     stack: ['Python', 'XGBoost', 'Scikit-learn', 'SHAP', 'Flask', 'React'],
     github: 'https://github.com/HIRA04IRSHAD/student-dropout-marks-prediction-model',
     color: '#22c55e',
@@ -93,7 +110,7 @@ export const projects = [
     name: 'Vehicle Parking App',
     tagline: 'Flask Parking Lot Management',
     desc: 'Admin lots/spots, user booking & release with billing, stats via Matplotlib charts.',
-    detail: 'Full-stack parking lot management built for the IIT Madras MAD-1 project. Admin can create and manage lots and spots. Users book, release, and get billed automatically. Includes visual statistics rendered with Matplotlib embedded in the Flask app.',
+    detail: 'Full-stack parking lot management built for the IIT Madras MAD-1 project. Admin can create and manage lots and spots. Users book, release, and get billed automatically. Visual statistics rendered with Matplotlib.',
     stack: ['Python', 'Flask', 'SQLite', 'Jinja2', 'Matplotlib'],
     github: 'https://github.com/HIRA04IRSHAD/vehicle-parking-app',
     color: '#a855f7',
@@ -102,7 +119,7 @@ export const projects = [
     name: 'Interactive Canvas',
     tagline: 'HTML5 Drawing App',
     desc: 'Brush, eraser, shapes with fill toggle, color picker, and image export on HTML5 Canvas.',
-    detail: 'A feature-rich drawing application built with vanilla JavaScript on HTML5 Canvas. Supports free-hand brush, eraser, rectangle/circle shapes with fill toggle, customizable color picker, and export to image. Clean, responsive UI with tool switching.',
+    detail: 'Feature-rich drawing app with vanilla JS on HTML5 Canvas. Supports free-hand brush, eraser, rectangle/circle shapes with fill toggle, customizable color picker, and export to image.',
     stack: ['JavaScript', 'HTML5 Canvas', 'CSS'],
     github: 'https://github.com/HIRA04IRSHAD/interactive-canvas-app',
     color: '#f97316',
@@ -111,7 +128,7 @@ export const projects = [
     name: 'GATE DSA Tracker',
     tagline: 'Daily Prep Dashboard',
     desc: 'Track daily DSA practice, GATE subjects, and LeetCode progress with streak counting.',
-    detail: 'Personal dashboard for GATE CS and DSA prep tracking. Logs daily practice problems, subject-wise GATE syllabus coverage, and LeetCode progress with streaks and consistency metrics. Firebase backend for persistent data.',
+    detail: 'Personal dashboard for GATE CS and DSA prep tracking. Logs daily practice, subject-wise syllabus coverage, and LeetCode progress with streaks. Firebase backend for persistent data.',
     stack: ['React', 'Firebase', 'JavaScript'],
     github: 'https://github.com/HIRA04IRSHAD/gate-dsa-tracker',
     color: '#06b6d4',
@@ -120,10 +137,28 @@ export const projects = [
     name: 'Saranda House Website',
     tagline: 'Open Source Contribution',
     desc: 'Added scroll-to-top button, upcoming meetups block, and newsletter route to the IIT Madras BS house website.',
-    detail: 'Contributed multiple PRs to the Saranda House (IIT Madras BS) community website: a scroll-to-top floating button, an upcoming-meetups information block, and a newsletter subscription route. Collaborative open-source contribution.',
+    detail: 'Contributed multiple PRs to the Saranda House community website: a scroll-to-top floating button, an upcoming-meetups information block, and a newsletter subscription route.',
     stack: ['JavaScript', 'React', 'CSS'],
     github: 'https://github.com/HIRA04IRSHAD/saranda_website_project',
     color: '#ec4899',
+  },
+  {
+    name: 'BillSahi',
+    tagline: 'Billing & Invoice App',
+    desc: 'Billing application built with TypeScript for managing invoices and payments.',
+    detail: 'A modern billing and invoice management application. Create, track and manage invoices with a clean UI built in TypeScript.',
+    stack: ['TypeScript', 'React', 'Vite'],
+    github: 'https://github.com/HIRA04IRSHAD/billsahi',
+    color: '#8B6F5E',
+  },
+  {
+    name: 'Sportify Helpdesk',
+    tagline: 'Support Ticket System',
+    desc: 'Customer helpdesk application for managing support tickets and queries.',
+    detail: 'A helpdesk ticketing system for managing customer support queries. Assign, track, and resolve tickets with a dashboard interface.',
+    stack: ['JavaScript', 'Node.js', 'CSS'],
+    github: 'https://github.com/HIRA04IRSHAD/sportify-helpdesk',
+    color: '#14b8a6',
   },
 ];
 
@@ -138,14 +173,16 @@ export const experience = [
     role: 'Web Developer',
     org: 'Saranda House, IIT Madras BS',
     period: 'Nov 2025 – Present',
-    detail: 'Building and maintaining the house website. Contributed scroll-to-top navigation, upcoming-meetups blocks, and newsletter subscription features through multiple pull requests.',
+    detail: 'Building and maintaining the house website. Contributed scroll-to-top navigation, upcoming-meetups blocks, and newsletter subscription features.',
   },
 ];
 
-export const techStack = {
-  'Frontend': ['React', 'Next.js', 'TypeScript', 'Vite', 'Tailwind CSS', 'HTML/CSS', 'JavaScript'],
-  'Backend': ['Flask', 'Node.js', 'REST APIs', 'Jinja2'],
-  'AI / ML': ['XGBoost', 'Scikit-learn', 'SHAP', 'Gemini API', 'PyMuPDF', 'NLP', 'RAG'],
-  'Data': ['SQLite', 'Firebase', 'Pandas', 'Matplotlib', 'NumPy'],
-  'Cloud & Tools': ['Google Cloud', 'GitHub Actions', 'Git', 'Docker', 'CI/CD'],
+export const techStack: Record<string, string[]> = {
+  'Languages': ['Python', 'JavaScript', 'TypeScript', 'C', 'C++', 'SQL', 'HTML', 'CSS'],
+  'Frontend': ['React', 'Next.js', 'Vite', 'Tailwind CSS', 'Bootstrap', 'jQuery'],
+  'Backend': ['Flask', 'Node.js', 'Express.js', 'REST APIs', 'Jinja2'],
+  'AI / ML': ['XGBoost', 'Scikit-learn', 'SHAP', 'Pandas', 'NumPy', 'Matplotlib', 'NLP', 'RAG', 'Gemini API', 'PyMuPDF'],
+  'Databases': ['SQLite', 'Firebase Realtime DB', 'Firebase Auth', 'PostgreSQL'],
+  'Cloud & DevOps': ['Google Cloud Platform', 'GitHub Actions', 'Docker', 'CI/CD', 'Cloud Run', 'Cloud Build'],
+  'Tools': ['Git', 'GitHub', 'VS Code', 'Jupyter', 'Postman', 'Linux', 'Figma'],
 };
