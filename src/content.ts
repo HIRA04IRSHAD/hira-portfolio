@@ -23,9 +23,11 @@ export const bio = [
   'Currently finishing a dual degree (B.Tech CSE + IIT Madras BS Data Science) and building tools that make AI useful for real people:',
 ];
 
+const base = import.meta.env.BASE_URL;
+
 export const photos = {
-  headshot: '/photos/headshot.webp',
-  outdoor: '/photos/outdoor.webp',
+  headshot: `${base}photos/headshot.webp`,
+  outdoor: `${base}photos/outdoor.webp`,
 };
 
 export const projects = [
