@@ -68,7 +68,7 @@ html {
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
   transition: background-color 0.4s;
-  scroll-behavior: smooth;
+
 }
 body {
   margin: 0;
@@ -411,6 +411,50 @@ body {
   transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), filter 0.9s cubic-bezier(0.16,1,0.3,1);
 }
 .blur-in.visible { opacity: 1; filter: blur(0); }
+
+/* ---- Vanta background ---- */
+.vanta-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.35;
+}
+
+/* ---- Hero GSAP entrance (hidden until animated) ---- */
+.hero-animate { visibility: hidden; }
+
+/* ---- Spotlight card ---- */
+.spotlight-card { position: relative; }
+.spotlight-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s;
+  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    color-mix(in srgb, var(--disc) 12%, transparent),
+    transparent 40%
+  );
+  pointer-events: none;
+}
+.spotlight-card:hover::after { opacity: 1; }
+
+/* ---- Click spark ---- */
+.click-spark {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--disc);
+  pointer-events: none;
+  z-index: 9998;
+  animation: spark-fly 0.5s ease-out forwards;
+}
+@keyframes spark-fly {
+  0% { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--dx, 20px), var(--dy, -20px)) scale(0); }
+}
 
 /* ---- Reduced motion ---- */
 @media (prefers-reduced-motion: reduce) {

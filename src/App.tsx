@@ -1,6 +1,17 @@
 import {useCallback, useEffect, useRef, useState} from 'react';
+import gsap from 'gsap';
+import {ScrollTrigger} from 'gsap/ScrollTrigger';
+import {useGSAP} from '@gsap/react';
+import Lenis from 'lenis';
+import 'lenis/dist/lenis.css';
+import * as THREE from 'three';
+import NET from 'vanta/dist/vanta.net.min';
 import {aboutDescription, aboutMe, experience, flipBio, heroTagline, nav, person, photos, projects, socials, techStack} from './content';
 import {useFitHeadline, useScrollReveal, useTheme, useTilt} from './hooks';
+
+gsap.registerPlugin(ScrollTrigger);
+
+const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ================================================================== */
 /*  SVG Icons                                                          */
@@ -38,6 +49,73 @@ const SocialIcon = ({icon, className}: {icon: string; className?: string}) => {
 };
 
 /* ================================================================== */
+/*  Vanta.js animated hero background                                  */
+/* ================================================================== */
+
+function VantaHero({dark}: {dark: boolean}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const effectRef = useRef<ReturnType<typeof NET> | null>(null);
+
+  useEffect(() => {
+    if (!ref.current || prefersReducedMotion()) return;
+    if (window.innerWidth < 768) return;
+
+    const el = ref.current;
+    el.innerHTML = '';
+    try {
+      effectRef.current = NET({
+        el,
+        THREE,
+        mouseControls: true,
+        touchControls: false,
+        color: dark ? 0x9CAF88 : 0x722F37,
+        backgroundColor: dark ? 0x2C2C2C : 0xE8DCC6,
+        points: 8,
+        maxDistance: 22,
+        spacing: 18,
+        showDots: false,
+      });
+    } catch { /* Vanta init can fail in Strict Mode remount */ }
+
+    return () => {
+      effectRef.current?.destroy();
+      effectRef.current = null;
+    };
+  }, [dark]);
+
+  return <div ref={ref} className="vanta-bg" />;
+}
+
+/* ================================================================== */
+/*  Click Spark effect                                                 */
+/* ================================================================== */
+
+function useClickSpark() {
+  useEffect(() => {
+    if (prefersReducedMotion()) return;
+
+    const handler = (e: MouseEvent) => {
+      const count = 8;
+      for (let i = 0; i < count; i++) {
+        const spark = document.createElement('div');
+        spark.className = 'click-spark';
+        spark.style.left = `${e.clientX}px`;
+        spark.style.top = `${e.clientY}px`;
+        const angle = (360 / count) * i + Math.random() * 30;
+        const distance = 25 + Math.random() * 35;
+        spark.style.setProperty('--dx', `${Math.cos(angle * Math.PI / 180) * distance}px`);
+        spark.style.setProperty('--dy', `${Math.sin(angle * Math.PI / 180) * distance}px`);
+        document.body.appendChild(spark);
+        spark.addEventListener('animationend', () => spark.remove());
+      }
+    };
+
+    window.addEventListener('click', handler);
+    return () => window.removeEventListener('click', handler);
+  }, []);
+}
+
+/* ================================================================== */
 /*  Intro Loader (split screen)                                        */
 /* ================================================================== */
 
@@ -56,7 +134,7 @@ function IntroLoader({done, hidden}: {done: boolean; hidden: boolean}) {
 }
 
 /* ================================================================== */
-/*  Glossy Sticky Navbar                                               */
+/*  Glossy Floating Navbar                                             */
 /* ================================================================== */
 
 function StickyNav({dark, onToggle}: {dark: boolean; onToggle: () => void}) {
@@ -84,7 +162,6 @@ function StickyNav({dark, onToggle}: {dark: boolean; onToggle: () => void}) {
   return (
     <header className={`sticky-nav ${scrolled ? 'scrolled' : ''}`}>
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">
-        {/* Logo */}
         <a href="#" className="flex items-center gap-2.5 font-cursive text-[17px] font-semibold">
           <span className="relative size-8 overflow-hidden rounded-full bg-disc ring-2 ring-disc/30">
             <img src={photos.headshot} alt="" className="absolute inset-0 h-full w-full object-cover" />
@@ -92,7 +169,6 @@ function StickyNav({dark, onToggle}: {dark: boolean; onToggle: () => void}) {
           <span className="hidden sm:inline">{person.fullName}</span>
         </a>
 
-        {/* Nav links */}
         <nav className="flex items-center gap-1">
           {nav.map((n) => (
             <a
@@ -107,7 +183,6 @@ function StickyNav({dark, onToggle}: {dark: boolean; onToggle: () => void}) {
           ))}
         </nav>
 
-        {/* Right: resume + socials + theme */}
         <div className="flex items-center gap-2">
           <a
             href={person.resumeUrl}
@@ -164,7 +239,6 @@ function FlipPhoto() {
         onClick={() => setFlipped((f) => !f)}
       >
         <div className="flip-card">
-          {/* Front: headshot */}
           <div className="flip-front">
             <div className="absolute inset-0 rounded-full bg-disc shadow-[0_0_80px_var(--glow)]" />
             <img
@@ -174,7 +248,6 @@ function FlipPhoto() {
               draggable={false}
             />
           </div>
-          {/* Back: bio text */}
           <div className="flip-back glossy-curve !rounded-full">
             <div className="relative z-10 space-y-2">
               <p className="font-cursive text-[clamp(16px,1.8vw,22px)] font-bold leading-snug">{heroTagline}</p>
@@ -210,7 +283,6 @@ function AboutSection() {
         About <span className="gradient-text italic">Me</span>
       </h2>
 
-      {/* Description paragraph first */}
       <div className="blur-in mx-auto mb-8 max-w-2xl space-y-3 text-center">
         {aboutDescription.map((p, i) => (
           <p key={i} className="text-[15px] leading-relaxed text-mute">{p}</p>
@@ -233,7 +305,6 @@ function AboutSection() {
           ))}
         </div>
 
-        {/* Education */}
         <div className={`section-panel ${openTab === 'education' ? 'open' : ''}`}>
           <div className="section-inner">
             <div className="space-y-4 pb-2">
@@ -248,7 +319,6 @@ function AboutSection() {
           </div>
         </div>
 
-        {/* Achievements */}
         <div className={`section-panel ${openTab === 'achievements' ? 'open' : ''}`}>
           <div className="section-inner">
             <div className="space-y-3 pb-2">
@@ -264,7 +334,6 @@ function AboutSection() {
           </div>
         </div>
 
-        {/* Certifications */}
         <div className={`section-panel ${openTab === 'certifications' ? 'open' : ''}`}>
           <div className="section-inner">
             <div className="space-y-3 pb-2">
@@ -285,7 +354,7 @@ function AboutSection() {
 }
 
 /* ================================================================== */
-/*  Project Card                                                       */
+/*  Project Card with spotlight effect                                 */
 /* ================================================================== */
 
 function ProjectCard({project, isOpen, onToggle}: {
@@ -293,8 +362,18 @@ function ProjectCard({project, isOpen, onToggle}: {
   isOpen: boolean;
   onToggle: () => void;
 }) {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+    e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+  };
+
   return (
-    <div className={`project-card glossy-curve p-5 md:p-6 ${isOpen ? 'selected' : ''}`} onClick={onToggle}>
+    <div
+      className={`project-card spotlight-card glossy-curve p-5 md:p-6 ${isOpen ? 'selected' : ''}`}
+      onClick={onToggle}
+      onMouseMove={handleMouseMove}
+    >
       <div className="card-stripe" style={{background: project.color}} />
       <div className="relative z-10">
         <div className="mb-1 flex items-center justify-between">
@@ -418,11 +497,9 @@ function TechStackSection() {
         ))}
       </div>
 
-      {/* Overlay */}
       <div className={`drawer-overlay ${drawerCat ? 'open' : ''}`} onClick={() => setDrawerCat(null)} />
 
-      {/* Side drawer */}
-      <div className={`side-drawer ${drawerCat ? 'open' : ''}`}>
+      <div className={`side-drawer ${drawerCat ? 'open' : ''}`} data-lenis-prevent>
         <div className="sticky top-0 z-10 flex items-center justify-between border-b border-line bg-page/90 px-6 py-4 backdrop-blur">
           <h3 className="font-cursive text-[20px] font-bold">{drawerCat}</h3>
           <button type="button" onClick={() => setDrawerCat(null)}
@@ -485,7 +562,6 @@ function ContactSection() {
       </p>
 
       <div className="scale-in mx-auto grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-2">
-        {/* Social links + resume */}
         <div className="glossy-curve p-6 md:p-8">
           <h3 className="mb-4 font-cursive text-[18px] font-bold">Get in Touch</h3>
           <div className="space-y-3">
@@ -509,7 +585,6 @@ function ContactSection() {
           </div>
         </div>
 
-        {/* Contact form */}
         <div className="glossy-curve p-6 md:p-8">
           <h3 className="mb-4 font-cursive text-[18px] font-bold">Send a Message</h3>
           <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
@@ -577,12 +652,14 @@ export default function App() {
   const [dark, toggle] = useTheme();
   const title = useFitHeadline<HTMLHeadingElement>();
   const [openProject, setOpenProject] = useState<number | null>(null);
+  const appRef = useRef<HTMLDivElement>(null);
   useScrollReveal();
+  useClickSpark();
 
   const [loaderDone, setLoaderDone] = useState(false);
   const [loaderHidden, setLoaderHidden] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
 
+  // Intro loader
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     const t1 = setTimeout(() => {
@@ -593,38 +670,90 @@ export default function App() {
     return () => { clearTimeout(t1); clearTimeout(t2); document.body.style.overflow = ''; };
   }, []);
 
+  // Lenis smooth scroll + GSAP integration
   useEffect(() => {
-    const onScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', onScroll, {passive: true});
-    return () => window.removeEventListener('scroll', onScroll);
+    if (prefersReducedMotion()) return;
+    const lenis = new Lenis({autoRaf: false, anchors: true});
+    lenis.on('scroll', ScrollTrigger.update);
+    const tickerCb = (time: number) => lenis.raf(time * 1000);
+    gsap.ticker.add(tickerCb);
+    gsap.ticker.lagSmoothing(0);
+    return () => {
+      gsap.ticker.remove(tickerCb);
+      lenis.destroy();
+    };
   }, []);
 
+  // GSAP hero entrance + ScrollTrigger parallax
+  useGSAP(() => {
+    const mm = gsap.matchMedia();
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      // Hero entrance after intro loader
+      const tl = gsap.timeline({delay: 2});
+      tl.from('.headline', {y: 80, autoAlpha: 0, duration: 1.2, ease: 'power3.out'})
+        .from('.stage', {scale: 0.85, autoAlpha: 0, duration: 1, ease: 'power3.out'}, '-=0.8')
+        .from('.hero-experience', {y: 40, autoAlpha: 0, duration: 0.8, ease: 'power3.out'}, '-=0.5');
+
+      // Parallax on hero headline
+      gsap.to('.headline', {
+        y: 80,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: 'main',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1.5,
+        },
+      });
+
+      // Parallax on photo (opposite direction)
+      gsap.to('.stage', {
+        y: -40,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: 'main',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1.5,
+        },
+      });
+
+      // Project cards stagger on scroll
+      ScrollTrigger.batch('.project-card', {
+        onEnter: (batch) => gsap.from(batch, {
+          y: 60,
+          autoAlpha: 0,
+          stagger: 0.1,
+          duration: 0.8,
+          ease: 'power3.out',
+        }),
+        start: 'top 85%',
+        once: true,
+      });
+    });
+  }, {scope: appRef});
+
   return (
-    <div className="flex min-h-[100svh] flex-col bg-page text-ink">
+    <div ref={appRef} className="flex min-h-[100svh] flex-col bg-page text-ink">
       <IntroLoader done={loaderDone} hidden={loaderHidden} />
       <StickyNav dark={dark} onToggle={toggle} />
 
       {/* Hero */}
       <main className="relative isolate flex flex-col px-[clamp(16px,2.4vw,36px)] pt-[clamp(72px,10vh,100px)] text-center">
-        <h1 ref={title} className="headline relative z-0 inline-block text-[21vw] md:whitespace-nowrap"
-          style={{transform: `translateY(${Math.min(scrollY * 0.08, 80)}px)`, willChange: scrollY > 0 ? 'transform' : undefined}}>
+        <VantaHero dark={dark} />
+
+        <h1 ref={title} className="headline hero-animate relative z-0 inline-block text-[21vw] md:whitespace-nowrap">
           <span className="block md:inline">Hey, I'm </span>
           <span className="marker">{person.name}</span>
         </h1>
 
-        {/* Image LEFT, Experience RIGHT */}
         <div className="relative grid flex-1 grid-cols-1 items-center gap-x-10 gap-y-8 text-left md:grid-cols-[1fr_1fr] lg:grid-cols-[auto_1fr]">
-          {/* Left: Flip photo */}
-          <div className="stage relative mx-auto w-[min(80vw,400px)] md:order-1"
-            style={{transform: `translateY(${Math.min(scrollY * -0.04, 0)}px)`}}>
+          <div className="stage hero-animate relative mx-auto w-[min(80vw,400px)] md:order-1">
             <FlipPhoto />
           </div>
 
-          {/* Right: Experience */}
-          <div className="relative z-10 flex flex-col gap-6 pb-[clamp(20px,5vh,48px)] md:order-2">
-            <div className="fade-up">
-              <ExperienceSection />
-            </div>
+          <div className="hero-experience hero-animate relative z-10 flex flex-col gap-6 pb-[clamp(20px,5vh,48px)] md:order-2">
+            <ExperienceSection />
           </div>
         </div>
       </main>
@@ -637,14 +766,11 @@ export default function App() {
           Featured <span className="gradient-text italic">Projects</span>
         </h2>
         <p className="fade-up mb-10 text-center text-[14px] text-mute">Click a card to see the full story and links</p>
-        <div className="stagger mx-auto grid max-w-5xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((p, i) => (
-            <div key={p.name} className="fade-up">
-              <ProjectCard project={p} isOpen={openProject === i} onToggle={() => setOpenProject(openProject === i ? null : i)} />
-            </div>
+            <ProjectCard key={p.name} project={p} isOpen={openProject === i} onToggle={() => setOpenProject(openProject === i ? null : i)} />
           ))}
         </div>
-        {/* Detail panel below grid */}
         <div className={`detail-panel mx-auto max-w-5xl mt-4 ${openProject !== null ? 'open' : ''}`}>
           <div className="detail-inner">
             {openProject !== null && <ProjectDetail project={projects[openProject]} />}
