@@ -241,10 +241,15 @@ body {
 }
 
 /* ---- Stage tuck ---- */
-.stage { margin-top: calc(var(--mega, 80px) * -0.3); }
+/* Phones: keep the photo below the headline; it only tucks under it on wider screens */
+.stage { margin-top: 8px; }
 @media (min-width: 768px) {
   .stage { margin-top: calc(var(--mega, 160px) * -0.62); }
 }
+
+/* ---- Scrollable row without a visible scrollbar (mobile nav) ---- */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
 
 /* ---- 3D tilt ---- */
 .photo-stage { perspective: 800px; perspective-origin: center center; }

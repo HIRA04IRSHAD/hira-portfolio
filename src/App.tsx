@@ -161,24 +161,29 @@ function StickyNav({dark, onToggle}: {dark: boolean; onToggle: () => void}) {
 
   return (
     <header className={`sticky-nav ${scrolled ? 'scrolled' : ''}`}>
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">
-        <a href="#" className="flex items-center gap-2.5 font-cursive text-[17px] font-semibold">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 px-3 py-3 sm:gap-4 sm:px-4 md:px-6">
+        <a href="#" className="hidden items-center gap-2.5 font-cursive text-[17px] font-semibold sm:flex">
           <span className="relative size-8 overflow-hidden rounded-full bg-disc ring-2 ring-disc/30">
             <img src={photos.headshot} alt="" className="absolute inset-0 h-full w-full object-cover" />
           </span>
-          <span className="hidden sm:inline">{person.fullName}</span>
+          <span className="hidden lg:inline">{person.fullName}</span>
         </a>
 
-        <nav className="flex items-center gap-1">
+        <nav className="no-scrollbar flex min-w-0 items-center gap-0.5 overflow-x-auto sm:gap-1">
           {nav.map((n) => (
             <a
               key={n.href}
               href={n.href}
-              className={`btn-glossy rounded-full px-4 py-2 font-sans text-[12px] font-semibold uppercase tracking-wider ${
+              className={`btn-glossy shrink-0 whitespace-nowrap rounded-full px-2 py-1.5 font-sans text-[10.5px] font-semibold uppercase tracking-normal md:px-3 md:text-[11px] lg:px-4 lg:py-2 lg:text-[12px] lg:tracking-wider ${
                 active === n.href ? 'text-disc' : 'text-mute hover:text-ink'
               }`}
             >
-              {n.label}
+              {'short' in n ? (
+                <>
+                  <span className="sm:hidden">{n.short}</span>
+                  <span className="hidden sm:inline">{n.label}</span>
+                </>
+              ) : n.label}
             </a>
           ))}
         </nav>
@@ -188,7 +193,7 @@ function StickyNav({dark, onToggle}: {dark: boolean; onToggle: () => void}) {
             href={person.resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-glossy-filled hidden rounded-full px-4 py-2 font-sans text-[12px] font-semibold uppercase tracking-wider sm:inline-flex"
+            className="btn-glossy-filled hidden rounded-full px-4 py-2 font-sans text-[12px] font-semibold uppercase tracking-wider md:inline-flex"
           >
             Resume
           </a>
@@ -198,7 +203,7 @@ function StickyNav({dark, onToggle}: {dark: boolean; onToggle: () => void}) {
               href={s.href}
               target={s.icon === 'email' ? undefined : '_blank'}
               rel="noopener noreferrer"
-              className="btn-glossy hidden size-8 items-center justify-center rounded-full md:flex"
+              className="btn-glossy hidden size-8 items-center justify-center rounded-full lg:flex"
               aria-label={s.label}
             >
               <SocialIcon icon={s.icon} />

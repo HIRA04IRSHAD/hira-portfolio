@@ -12,7 +12,7 @@ export const person = {
 export const nav = [
   {label: 'About', href: '#about'},
   {label: 'Projects', href: '#projects'},
-  {label: 'Tech Stack', href: '#tech'},
+  {label: 'Tech Stack', short: 'Stack', href: '#tech'},
   {label: 'Contact', href: '#contact'},
 ];
 
@@ -25,14 +25,14 @@ export const socials = [
 export const heroTagline = 'I build AI-powered products.';
 
 export const flipBio = [
-  'Full-stack developer who ships with React, Next.js, Flask and LLM APIs. Built AI pipelines at IIT Roorkee and study tools used across campuses.',
+  'Full-stack developer who ships with React, Next.js, Flask and LLM APIs. Built AI pipelines at IIT Roorkee and real-time study tools for GATE and DSA prep.',
   'GATE CS 2026 qualified. Selected for the University of Tokyo data science programme.',
   'Wrapping up a dual degree in B.Tech CSE and IIT Madras BS Data Science, building tools that bring AI closer to real people.',
 ];
 
 export const aboutDescription = [
   'Hi, I\'m Hira Irshad. A dual degree student in Computer Science and Engineering at MJPRU Bareilly (2023 to 2027) and Data Science at IIT Madras.',
-  'I build full-stack products with React, Next.js, Flask and LLM APIs. From AI pipelines at IIT Roorkee to campus-wide study trackers, I turn ideas into tools people actually use.',
+  'I build full-stack products with React, Next.js, Flask and LLM APIs. From AI pipelines at IIT Roorkee to real-time study trackers, I turn ideas into tools people actually use.',
   'Qualified GATE CS 2026 and selected for the University of Tokyo data science programme. Always open to internships, freelance gigs, and exciting collaborations.',
 ];
 
@@ -71,8 +71,8 @@ export const projects = [
   {
     name: 'SmartSearch PDF',
     tagline: 'AI-Grounded PDF Topic Search',
-    desc: 'Find every occurrence of a word in any PDF with page, chapter and context, then ask Gemini to explain it.',
-    detail: 'Full-stack app that detects chapters from the PDF\'s table of contents with a font-size heading fallback. Calls the LLM only for rows the user shortlists, keeping search instant and API usage low. Built with a React 18 frontend and Flask backend powered by PyMuPDF for PDF parsing.',
+    desc: 'Find every page where a word appears in any PDF, with its chapter and context, then ask Gemini to explain it.',
+    detail: 'Full-stack app that detects chapters from the PDF\'s table of contents with a font-size heading fallback. Calls the LLM only for rows the user shortlists, keeping search instant and API usage low. Built with a React 19 frontend and Flask backend powered by PyMuPDF for PDF parsing.',
     stack: ['Python', 'Flask', 'PyMuPDF', 'React', 'Vite', 'Gemini API'],
     github: 'https://github.com/HIRA04IRSHAD/smartsearch-pdf',
     color: 'var(--sun)',
@@ -128,8 +128,8 @@ export const projects = [
     name: 'Saranda House Website',
     tagline: 'Open Source Contribution',
     desc: 'Added scroll-to-top button, upcoming meetups block, and newsletter route to the IIT Madras BS house website.',
-    detail: 'Contributed multiple PRs to the Saranda House community website: a scroll-to-top floating button, an upcoming-meetups information block, and a newsletter subscription route.',
-    stack: ['JavaScript', 'React', 'CSS'],
+    detail: 'Contributed multiple PRs to the Saranda House community website: a scroll-to-top floating button, an upcoming-meetups information block, and a newsletter route. Also work directly in the Sanity CMS behind the site.',
+    stack: ['Next.js', 'React', 'Sanity CMS', 'Tailwind CSS'],
     github: 'https://github.com/HIRA04IRSHAD/saranda_website_project',
     color: '#ec4899',
   },
