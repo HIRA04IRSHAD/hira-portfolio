@@ -98,15 +98,6 @@ export const projects = [
     color: 'var(--disc)',
   },
   {
-    name: 'Learner Success Predictor',
-    tagline: 'ML & Explainable AI Pipeline',
-    desc: 'Predicting MOOC certification outcomes at 98.99% accuracy with XGBoost and SHAP explainability.',
-    detail: 'End-to-end ML pipeline on the HarvardX-MITx MOOC dataset using an XGBoost classifier. Integrated SHAP-based explainable AI to surface feature-level attributions. Deployed through a Flask REST API with a React.js dashboard for real-time prediction and risk assessment.',
-    stack: ['Python', 'XGBoost', 'Scikit-learn', 'SHAP', 'Flask', 'React'],
-    github: 'https://github.com/HIRA04IRSHAD/student-dropout-marks-prediction-model',
-    color: '#22c55e',
-  },
-  {
     name: 'Vehicle Parking App',
     tagline: 'Flask Parking Lot Management',
     desc: 'Admin lots/spots, user booking & release with billing, stats via Matplotlib charts.',
