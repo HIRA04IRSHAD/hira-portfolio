@@ -43,22 +43,21 @@ export const aboutMe = {
   ],
   achievements: [
     'GATE CS 2026 Qualified',
-    'Selected for University of Tokyo Data Science Programme',
-    'AI/ML Intern at IIT Roorkee, Google Centre for Climate Technology',
-    'Web Developer at Saranda House, IIT Madras BS',
+    'Selected for GCI World 2026, University of Tokyo, Matsuo-Iwasawa Lab',
+    'Certificate of Excellence — Sundarbans House, IITM BS, for the Ubuntu Mastery Quiz',
+    'Certificate of Appreciation — IIT Madras BS, for WebOps contributions to Saranda House',
+    'Women Who Master Hackathon — Logitech x Aspire For Her',
   ],
   certifications: [
-    'Google Cloud Computing Foundations (Google Cloud)',
-    'Machine Learning Techniques (IIT Madras)',
-    'Business Data Management (IIT Madras)',
-    'Machine Learning Practice (IIT Madras)',
-    'Business Analytics (IIT Madras)',
-    'Tools in Data Science (IIT Madras)',
-    'Programming in Python (IIT Madras)',
-    'English I & II (IIT Madras)',
-    'Statistics I & II (IIT Madras)',
-    'Mathematics I & II (IIT Madras)',
-    'Computational Thinking (IIT Madras)',
+    'Google AI Essentials — Gemini Certified Student (Google)',
+    'Azure Computer Vision Solutions (Microsoft)',
+    'AI Concepts and Basics (Microsoft)',
+    'Introduction to Prompts for Generative AI (Microsoft)',
+    'AI Fluency (Microsoft)',
+    'Copilot for Microsoft 365 (Microsoft)',
+    'Data Science and Analytics (HP LIFE)',
+    'Certified Young Professional (TCS iON)',
+    'Google Cloud — 98 Skill Badges, Silver League',
   ],
 };
 
@@ -146,10 +145,10 @@ export const projects = [
 
 export const experience = [
   {
-    role: 'AI/ML Intern',
+    role: 'AI/ML & Full-Stack Intern',
     org: 'IIT Roorkee · Google Centre for Climate Technology',
     period: 'Sep - Oct 2026',
-    detail: 'BoQ-to-Material-Passport extraction pipeline for AMP-GEN. Processed construction documents using Python, NLP, and structured data extraction to create machine-readable material passports.',
+    detail: 'Worked on GMAP, a Material Passport platform for the Indian construction industry. Rebuilt the frontend in Next.js 15, React 19 and Tailwind CSS v4 with a design-token system. Designed and built a separate module end-to-end and integrated it into the main website.',
   },
   {
     role: 'Web Developer',
